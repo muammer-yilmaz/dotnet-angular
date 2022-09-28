@@ -1,0 +1,27 @@
+<h1 class="text-center">HELOOOOO</h1>
+
+
+<div *ngIf="dataLoaded == false" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">productId</th>
+            <th scope="col">categoryId</th>
+            <th scope="col">productName</th>
+            <th scope="col">unitPrice</th>
+            <th scope="col">unitsInStock</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>{{product.productId}}</td>
+            <td>{{product.categoryId}}</td>
+            <td>{{product.productName}}</td>
+            <td>{{product.unitPrice}}</td>
+            <td>{{product.unitsInStock}}</td>
+        </tr>
+    </tbody>
+</table>
