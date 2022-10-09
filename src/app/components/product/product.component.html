@@ -2,23 +2,40 @@
     <span class="visually-hidden">Loading...</span>
 </div>
 
+<div class="d-grid my-3" role="search">
+    <div class="col-6 offset-3">
+        <input id="filterText" [(ngModel)]="filterText" class="form-control me-2" type="text" placeholder="Search"
+            aria-label="Search">
+    </div>
+    <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+</div>
+
+<div>
+    <h6 *ngIf="filterText && filterText.trim().length !== 0" class="text-success text-center">{{filterText}} aradınız
+    </h6>
+</div>
+
 <table class="table table-hover table-striped">
     <thead>
-        <tr>
-            <th scope="col">productId</th>
+        <tr class="text-center">
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
             <th scope="col">categoryId</th>
-            <th scope="col">productName</th>
-            <th scope="col">unitPrice</th>
-            <th scope="col">unitsInStock</th>
+            <th scope="col">Price</th>
+            <th scope="col">Kdv'li Fiyat</th>
+            <th scope="col">Stock</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of products">
+        <tr class="text-center" *ngFor="let product of products |filterPipe:filterText">
             <td>{{product.productId}}</td>
+            <td>{{product.productName |uppercase}}</td>
             <td>{{product.categoryId}}</td>
-            <td>{{product.productName}}</td>
-            <td>{{product.unitPrice}}</td>
+            <td>{{product.unitPrice |currency}}</td>
+            <td>{{product.unitPrice |vatAdded:10 |currency}}</td>
             <td>{{product.unitsInStock}}</td>
+            <td><button (click)="addToCart(product)" class="btn btn-sm btn-success">Sepete Ekle</button></td>
         </tr>
     </tbody>
 </table>
